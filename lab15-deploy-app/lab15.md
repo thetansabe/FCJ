@@ -73,7 +73,10 @@ When we create VPC, chose VPC and more, which will have multi-region config (2 A
 
 ![VPCandmore](VPCandmore.png)
 
-- Public sg: need to add inbound rule: HTTP 80, SSH 22, HTTPS 443, Custom TCP port range 3000 (for RDS on port 3306).
+- Public sg: need to add inbound rule: HTTP 80, SSH 22, HTTPS 443, Custom TCP port range 3000 (for nginx external port, we will http://ec2-public-ip:3000 later to open the web).
+
+Even though HTTP and HTTPS are on top of TCP, but we need to add TCP separately, because HTTP is always on port 80, HTTPS is always on port 443, but our nginx is on port 3000, so we need to add TCP 3000.
+
 - DB sg: inbound rule: MySQL/Aurora 3306 source from public sg.
 
 Go to RDS page, we need to add subnet group, this is to failover, which means if one AZ goes down, it can failover to another AZ, so you need to provide at least 2 subnets in different AZs.
