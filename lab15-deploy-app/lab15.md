@@ -146,3 +146,25 @@ sudo docker run -p 5000:5000 --network my-network --name backend backend-image
 ```
 
 In docker compose approach, we use nginx, so we don't need docker network, because nginx will connect to the containers via the service names defined in docker compose file. If we use docker network, to hit the backend server, we need to use backend:5000, not localhost:5000.
+
+### Clean up
+
+After follow clean up steps in the original awsstudygroup link we stil need to watch out:
+
+- RDS snapshot (~0.01 USD per day)
+
+  ![rdssnapshot](rdssnapshot.png)
+
+- RDS subnet group
+
+- RDS system retained snapshot
+
+  ![rdsystemsnapshot](rdsystemsnapshot.png)
+
+- RDS snapshot > systems, we cannot delete this manually, it will be deleted automatically after we delete retained backup (above).
+
+  ![rdsystemsnap](rdssystemsnap.png)
+
+Make sure nothing left:
+
+![rdsdashboard](rdsdashboard.png)
