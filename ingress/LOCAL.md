@@ -110,6 +110,12 @@ curl http://app1.local
 curl http://app2.local
 ```
 
+### Results
+
+1 ingress container + 2 app containers running:
+
+![local_result](local_result.png)
+
 ## Useful Commands
 
 ```bash
